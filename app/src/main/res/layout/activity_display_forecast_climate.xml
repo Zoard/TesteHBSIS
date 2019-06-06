@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zoardgeocze.testehbsis.DisplayForecastClimateActivity">
+    tools:context="com.zoardgeocze.testehbsis.view.activity.DisplayForecastClimateActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/display_forecast_recycler_view"
