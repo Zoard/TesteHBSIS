@@ -7,7 +7,7 @@ import android.view.ViewGroup;
  * Created by ZoardGeocze on 05/06/19.
  */
 
-public class DisplayForecastClimateAdapter extends RecyclerView.Adapter {
+public class ForecastClimateAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

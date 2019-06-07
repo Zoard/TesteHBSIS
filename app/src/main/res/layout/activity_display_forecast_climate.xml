@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.zoardgeocze.testehbsis.view.activity.DisplayForecastClimateActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/display_forecast_recycler_view"
+    <data>
+        <variable
+            name="forecastClimateViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.ForecastClimateViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:context="com.zoardgeocze.testehbsis.view.activity.DisplayForecastClimateActivity">
 
-</android.support.constraint.ConstraintLayout>
+        <!--<TextView
+            android:id="@+id/label_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{userViewModel.messageLabel}"
+            app:visibility="@{userViewModel.userLabel}"/>-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/display_forecast_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visibility="@{forecastClimateViewModel.forecastRecycler}"
+            tools:listitem="@layout/item_forecast_climate"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

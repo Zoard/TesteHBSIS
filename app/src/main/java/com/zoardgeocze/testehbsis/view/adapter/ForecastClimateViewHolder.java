@@ -7,9 +7,9 @@ import android.view.View;
  * Created by ZoardGeocze on 05/06/19.
  */
 
-public class DisplayForecastClimateViewHolder extends RecyclerView.ViewHolder {
+public class ForecastClimateViewHolder extends RecyclerView.ViewHolder {
 
-    public DisplayForecastClimateViewHolder(View itemView) {
+    public ForecastClimateViewHolder(View itemView) {
         super(itemView);
     }
 }
