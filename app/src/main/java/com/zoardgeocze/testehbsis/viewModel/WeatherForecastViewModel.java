@@ -53,7 +53,9 @@ public class WeatherForecastViewModel extends Observable {
                 .subscribe(new Consumer<WeatherForecastResponse>() {
                                @Override
                                public void accept(WeatherForecastResponse forecastClimateResponse) throws Exception {
-                                   Log.i("FETCH: ", forecastClimateResponse.city.getName());
+                                   Log.i("FETCH_City_Name: ", forecastClimateResponse.city.getName());
+                                   Log.i("FETCH_List_Size: ", Integer.toString(forecastClimateResponse.list.size()));
+
                                }
                            }, new Consumer<Throwable>() {
                                @Override
