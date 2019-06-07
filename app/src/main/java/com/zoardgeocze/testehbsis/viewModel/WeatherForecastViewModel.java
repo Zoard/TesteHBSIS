@@ -1,6 +1,7 @@
 package com.zoardgeocze.testehbsis.viewModel;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.ObservableInt;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import com.zoardgeocze.testehbsis.api.ApiCreator;
 import com.zoardgeocze.testehbsis.model.City;
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 import com.zoardgeocze.testehbsis.utils.Constants;
+import com.zoardgeocze.testehbsis.view.activity.AddWeatherForecastActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +22,10 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+
+/**
+ * Created by ZoardGeocze on 06/06/19.
+ */
 
 public class WeatherForecastViewModel extends Observable {
 
@@ -39,8 +45,7 @@ public class WeatherForecastViewModel extends Observable {
 
     public void onClickAddForecast(View view) {
         //TODO: Opens Add Forecast Activity
-        Log.i("Click", "onClickAddForecast: CLICOU");
-
+        startAddWeatherForecastActivity();
     }
 
     private void fetchCityList() {
@@ -65,5 +70,10 @@ public class WeatherForecastViewModel extends Observable {
 
 
         compositeDisposable.add(disposable);
+    }
+
+    private void startAddWeatherForecastActivity() {
+        Intent intent = new Intent(this.context, AddWeatherForecastActivity.class);
+        this.context.startActivity(intent);
     }
 }

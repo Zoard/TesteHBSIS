@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="addWeatherForecastViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.AddWeatherForecastViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.activity.AddWeatherForecastActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{addWeatherForecastViewModel.viewsVisibility}">
+
+            <EditText
+                android:id="@+id/add_weather_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="@={addWeatherForecastViewModel.cityName}"/>
+                <!--android:visibility="@{addWeatherForecastViewModel.cityNameLabel}"-->
+
+
+            <Button
+                android:id="@+id/search_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:text="Adicionar"
+                android:layout_below="@+id/add_weather_edit_text"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{addWeatherForecastViewModel::onClickFetchWeatherForecast}"/>
+                <!--android:visibility="@{addWeatherForecastViewModel.addButton}"-->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:visibility="@{addWeatherForecastViewModel.progressBar}"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

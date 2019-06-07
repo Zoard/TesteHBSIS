@@ -6,6 +6,9 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+/**
+ * Created by ZoardGeocze on 06/06/19.
+ */
 
 public class ApiCreator {
 

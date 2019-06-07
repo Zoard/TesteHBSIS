@@ -6,6 +6,10 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Created by ZoardGeocze on 06/06/19.
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class City implements Serializable {
 

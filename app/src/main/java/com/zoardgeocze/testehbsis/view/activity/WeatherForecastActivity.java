@@ -11,6 +11,10 @@ import com.zoardgeocze.testehbsis.databinding.ActivityWeatherForecastBinding;
 import com.zoardgeocze.testehbsis.view.adapter.WeatherForecastAdapter;
 import com.zoardgeocze.testehbsis.viewModel.WeatherForecastViewModel;
 
+/**
+ * Created by ZoardGeocze on 06/06/19.
+ */
+
 public class WeatherForecastActivity extends AppCompatActivity {
 
     private ActivityWeatherForecastBinding weatherForecastBinding;

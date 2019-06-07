@@ -4,6 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
 
+/**
+ * Created by ZoardGeocze on 07/06/19.
+ */
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Weather implements Serializable {
 
