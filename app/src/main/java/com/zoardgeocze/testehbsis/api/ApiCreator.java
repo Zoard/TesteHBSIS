@@ -22,6 +22,6 @@ public class ApiCreator {
 
     }
 
-    public ForecastClimateService forecastClimateService() {return this.retrofit.create(ForecastClimateService.class);}
+    public WeatherForecastService forecastClimateService() {return this.retrofit.create(WeatherForecastService.class);}
 
 }

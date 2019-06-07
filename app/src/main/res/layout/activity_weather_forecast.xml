@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="weatherForecastViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.WeatherForecastViewModel"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.zoardgeocze.testehbsis.view.activity.WeatherForecastActivity">
+
+        <!--<TextView
+            android:id="@+id/label_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{userViewModel.messageLabel}"
+            app:visibility="@{userViewModel.userLabel}"/>-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/display_forecast_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:visibility="@{weatherForecastViewModel.forecastRecycler}"
+            tools:listitem="@layout/item_weather_forecast"/>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/add_forecast"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="20dp"
+            android:src="@drawable/ic_add_24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="@{weatherForecastViewModel::onClickAddForecast}"/>
+
+
+
+        <!--<Button
+            android:id="@+id/add_forecast"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_margin="50dp"/>-->
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>
