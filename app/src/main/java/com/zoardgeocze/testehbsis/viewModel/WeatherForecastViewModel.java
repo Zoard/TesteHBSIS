@@ -1,8 +1,10 @@
 package com.zoardgeocze.testehbsis.viewModel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.ObservableInt;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
@@ -32,15 +34,18 @@ public class WeatherForecastViewModel extends Observable {
     public ObservableInt forecastRecycler;
 
     private Context context;
-    private List<City> cities;
+    private List<WeatherForecastResponse> weatherForecastList;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public WeatherForecastViewModel(@NonNull Context context) {
-
         this.context = context;
-        this.cities = new ArrayList<>();
+        this.weatherForecastList = new ArrayList<>();
         this.forecastRecycler = new ObservableInt(View.GONE);
         fetchCityList();
+    }
+
+    public List<WeatherForecastResponse> getForecastResponseList() {
+        return this.weatherForecastList;
     }
 
     public void onClickAddForecast(View view) {
@@ -56,15 +61,18 @@ public class WeatherForecastViewModel extends Observable {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<WeatherForecastResponse>() {
-                               @Override
-                               public void accept(WeatherForecastResponse forecastClimateResponse) throws Exception {
-                                   Log.i("FETCH_City_Name: ", forecastClimateResponse.city.getName());
-                                   Log.i("FETCH_List_Size: ", Integer.toString(forecastClimateResponse.list.size()));
+                           @Override
+                           public void accept(WeatherForecastResponse forecastClimateResponse) throws Exception {
+                               Log.i("FETCH_City_Name: ", forecastClimateResponse.city.getName());
+                               Log.i("FETCH_List_Size: ", Integer.toString(forecastClimateResponse.list.size()));
 
-                               }
+                               updateWeatherForecastList();
+
+                           }
                            }, new Consumer<Throwable>() {
                                @Override
                                public void accept(Throwable throwable) throws Exception {
+
                                }
                            });
 
@@ -72,8 +80,19 @@ public class WeatherForecastViewModel extends Observable {
         compositeDisposable.add(disposable);
     }
 
+    private void updateWeatherForecastList() {
+        //TODO: Update here the Weather Forecast List
+
+    }
+
     private void startAddWeatherForecastActivity() {
         Intent intent = new Intent(this.context, AddWeatherForecastActivity.class);
-        this.context.startActivity(intent);
+        ((Activity)this.context).startActivityForResult(intent, Constants.ADD_FORECAST);
+    }
+
+    public void dispose() {
+        if (compositeDisposable != null && compositeDisposable.isDisposed()) {
+            this.compositeDisposable.dispose();
+        }
     }
 }

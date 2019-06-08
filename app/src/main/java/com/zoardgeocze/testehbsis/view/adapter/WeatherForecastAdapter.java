@@ -35,9 +35,13 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
         holder.bindWeatherForecast(this.weatherForecastList.get(position));
     }
 
-
     @Override
     public int getItemCount() {
         return weatherForecastList.size();
+    }
+
+    public void setWeatherForecastList(List<WeatherForecastResponse> weatherForecastList) {
+        this.weatherForecastList = weatherForecastList;
+        this.notifyDataSetChanged();
     }
 }
