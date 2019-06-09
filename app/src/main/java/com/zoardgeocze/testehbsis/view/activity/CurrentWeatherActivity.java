@@ -13,6 +13,7 @@ import android.view.View;
 
 import com.zoardgeocze.testehbsis.R;
 import com.zoardgeocze.testehbsis.databinding.ActivityCurrentWeatherBinding;
+import com.zoardgeocze.testehbsis.model.CurrentWeatherResponse;
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 import com.zoardgeocze.testehbsis.utils.Constants;
 import com.zoardgeocze.testehbsis.view.adapter.CurrentWeatherAdapter;
@@ -69,20 +70,20 @@ public class CurrentWeatherActivity extends AppCompatActivity {
         this.startActivityForResult(intent, Constants.ADD_FORECAST);
     }
 
-    private void setNewItemOnCurrentWeatherList(WeatherForecastResponse weatherForecastResponse) {
+    private void setNewItemOnCurrentWeatherList(CurrentWeatherResponse currentWeatherResponse) {
         CurrentWeatherAdapter currentWeatherAdapter = (CurrentWeatherAdapter) this.currentWeatherBinding
                 .currentWeatherRecyclerView
                 .getAdapter();
-        currentWeatherAdapter.setCurrentWeatherList(weatherForecastResponse);
+        currentWeatherAdapter.setCurrentWeatherList(currentWeatherResponse);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK && requestCode == Constants.ADD_FORECAST) {
-            WeatherForecastResponse weatherForecastResponse = (WeatherForecastResponse) data.getSerializableExtra(Constants.RESPONSE);
-            Log.i("ON_ACTIVITY_RESULT:", weatherForecastResponse.city.getName());
-            this.setNewItemOnCurrentWeatherList(weatherForecastResponse);
+            CurrentWeatherResponse currentWeatherResponse = (CurrentWeatherResponse) data.getSerializableExtra(Constants.RESPONSE);
+            Log.i("ON_ACTIVITY_RESULT:", currentWeatherResponse.name);
+            this.setNewItemOnCurrentWeatherList(currentWeatherResponse);
         }
     }
 }

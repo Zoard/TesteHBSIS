@@ -4,11 +4,10 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
-import android.util.Log;
 import android.view.View;
 
 import com.zoardgeocze.testehbsis.api.ApiCreator;
-import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
+import com.zoardgeocze.testehbsis.model.CurrentWeatherResponse;
 import com.zoardgeocze.testehbsis.utils.Constants;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -29,7 +28,7 @@ public class AddNewCityViewModel extends ViewModel {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private MutableLiveData<WeatherForecastResponse> weatherForecastResponse = new MutableLiveData<>();
+    private MutableLiveData<CurrentWeatherResponse> currentWeatherResponse = new MutableLiveData<>();
 
     public void init() {
         this.cityName = new ObservableField<>();
@@ -40,21 +39,21 @@ public class AddNewCityViewModel extends ViewModel {
     public void onClickFetchWeatherForecast(View view) {
         this.viewsVisibility.set(View.GONE);
         this.progressBar.set(View.VISIBLE);
-        getForecastByCityName();
+        getCurrentWeatherByCityName();
     }
 
-    public MutableLiveData<WeatherForecastResponse> getWeatherForecastResponse() {
-        return this.weatherForecastResponse;
+    public MutableLiveData<CurrentWeatherResponse> getCurrentWeatherResponse() {
+        return this.currentWeatherResponse;
     }
 
-    private void getForecastByCityName() {
+    private void getCurrentWeatherByCityName() {
 
         Disposable disposable = new ApiCreator()
                 .forecastClimateService()
-                .getForecastByCityName(cityName.get(), Constants.METRIC_UNIT, Constants.API_KEY)
+                .getCurrentWeatherByCityName(cityName.get(), Constants.METRIC_UNIT, Constants.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> weatherForecastResponse.setValue(result));
+                .subscribe(result -> currentWeatherResponse.setValue(result));
 
         compositeDisposable.add(disposable);
     }

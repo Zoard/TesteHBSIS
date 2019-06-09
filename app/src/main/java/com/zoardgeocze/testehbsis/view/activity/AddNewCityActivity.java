@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.zoardgeocze.testehbsis.R;
 import com.zoardgeocze.testehbsis.databinding.ActivityAddNewCityBinding;
+import com.zoardgeocze.testehbsis.model.CurrentWeatherResponse;
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 import com.zoardgeocze.testehbsis.utils.Constants;
 import com.zoardgeocze.testehbsis.viewModel.AddNewCityViewModel;
@@ -37,12 +38,12 @@ public class AddNewCityActivity extends AppCompatActivity {
     }
 
     private void setLiveData() {
-        this.addNewCityViewModel.getWeatherForecastResponse().observe(this, this::addOnWeatherForecastList);
+        this.addNewCityViewModel.getCurrentWeatherResponse().observe(this, this::addOnCurrentWeatherList);
     }
 
-    public void addOnWeatherForecastList(WeatherForecastResponse weatherForecastResponse) {
+    public void addOnCurrentWeatherList(CurrentWeatherResponse currentWeatherResponse) {
         Intent intent = getIntent();
-        intent.putExtra(Constants.RESPONSE, weatherForecastResponse);
+        intent.putExtra(Constants.RESPONSE, currentWeatherResponse);
         setResult(Activity.RESULT_OK, intent);
         finish();
     }

@@ -2,9 +2,8 @@ package com.zoardgeocze.testehbsis.view.adapter;
 
 import android.support.v7.widget.RecyclerView;
 
-import com.zoardgeocze.testehbsis.databinding.ActivityCurrentWeatherBinding;
 import com.zoardgeocze.testehbsis.databinding.ItemCurrentWeatherBinding;
-import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
+import com.zoardgeocze.testehbsis.model.CurrentWeatherResponse;
 import com.zoardgeocze.testehbsis.viewModel.CurrentWeatherItemViewModel;
 
 /**
@@ -13,15 +12,19 @@ import com.zoardgeocze.testehbsis.viewModel.CurrentWeatherItemViewModel;
 
 public class CurrentWeatherViewHolder extends RecyclerView.ViewHolder {
 
-    private final ItemCurrentWeatherBinding itemCurrentWeatherBinding;
+    private ItemCurrentWeatherBinding itemCurrentWeatherBinding;
+    private CurrentWeatherItemViewModel currentWeatherItemViewModel;
 
     public CurrentWeatherViewHolder(ItemCurrentWeatherBinding itemCurrentWeatherBinding) {
-        super(itemCurrentWeatherBinding.getRoot());
+        super(itemCurrentWeatherBinding.currentWeatherItem);
         this.itemCurrentWeatherBinding = itemCurrentWeatherBinding;
+        this.currentWeatherItemViewModel = new CurrentWeatherItemViewModel();
+        this.currentWeatherItemViewModel.init();
+        this.itemCurrentWeatherBinding.setCurrentWeatherItemViewModel(this.currentWeatherItemViewModel);
     }
 
-    public void bindWeatherForecast(WeatherForecastResponse weatherForecast) {
-        this.itemCurrentWeatherBinding.getCurrentWeatherItemViewModel().setWeatherForecast(weatherForecast);
+    public void bindCurrentWeather(CurrentWeatherResponse currentWeatherResponse) {
+        this.itemCurrentWeatherBinding.getCurrentWeatherItemViewModel().setCurrentWeather(currentWeatherResponse);
     }
 
 }

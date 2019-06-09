@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.zoardgeocze.testehbsis.R;
 import com.zoardgeocze.testehbsis.databinding.ItemCurrentWeatherBinding;
+import com.zoardgeocze.testehbsis.model.CurrentWeatherResponse;
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 import com.zoardgeocze.testehbsis.viewModel.CurrentWeatherItemViewModel;
 
@@ -23,26 +24,26 @@ import java.util.List;
 
 public class CurrentWeatherAdapter extends RecyclerView.Adapter<CurrentWeatherViewHolder> {
 
-    private List<WeatherForecastResponse> currentWeatherList = new ArrayList<>();
+    private List<CurrentWeatherResponse> currentWeatherList = new ArrayList<>();
     private CurrentWeatherItemViewModel currentWeatherItemViewModel;
 
     @Override
     public CurrentWeatherViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        this.currentWeatherItemViewModel = ViewModelProviders.of((FragmentActivity) parent.getContext()).get(CurrentWeatherItemViewModel.class);
-        this.currentWeatherItemViewModel.init();
+        // this.currentWeatherItemViewModel = ViewModelProviders.of((FragmentActivity) parent.getContext()).get(CurrentWeatherItemViewModel.class);
+        // this.currentWeatherItemViewModel.init();
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemCurrentWeatherBinding itemCurrentWeatherBinding = DataBindingUtil.inflate(
                         layoutInflater,
                         R.layout.item_current_weather,
                         parent,
                         false);
-        itemCurrentWeatherBinding.setCurrentWeatherItemViewModel(currentWeatherItemViewModel);
+        // itemCurrentWeatherBinding.setCurrentWeatherItemViewModel(currentWeatherItemViewModel);
         return new CurrentWeatherViewHolder(itemCurrentWeatherBinding);
     }
 
     @Override
     public void onBindViewHolder(CurrentWeatherViewHolder holder, int position) {
-        holder.bindWeatherForecast(this.currentWeatherList.get(position));
+        holder.bindCurrentWeather(this.currentWeatherList.get(position));
     }
 
     @Override
@@ -50,8 +51,8 @@ public class CurrentWeatherAdapter extends RecyclerView.Adapter<CurrentWeatherVi
         return currentWeatherList.size();
     }
 
-    public void setCurrentWeatherList(WeatherForecastResponse weatherForecastResponse) {
-        this.currentWeatherList.add(weatherForecastResponse);
+    public void setCurrentWeatherList(CurrentWeatherResponse currentWeatherResponse) {
+        this.currentWeatherList.add(currentWeatherResponse);
         Log.i("CURRENT_WEATHER_ADAPTER", "setCurrentWeatherList: ");
         this.notifyDataSetChanged();
     }
