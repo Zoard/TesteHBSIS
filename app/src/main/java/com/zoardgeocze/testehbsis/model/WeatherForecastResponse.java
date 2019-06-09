@@ -5,6 +5,7 @@ import android.arch.lifecycle.MutableLiveData;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,21 +14,9 @@ import java.util.List;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WeatherForecastResponse {
+public class WeatherForecastResponse implements Serializable {
 
     public City city;
     public List<Forecast> list = new ArrayList<>();
-
-    /*public MutableLiveData<WeatherForecastItem> item = new MutableLiveData<>();
-
-    public WeatherForecastResponse() {
-        city = new City();
-    }
-
-    public void setNewItem() {
-        this.item.setValue(new WeatherForecastItem(this.city, this.list));
-    }
-    */
-
 
 }

@@ -1,18 +1,14 @@
 package com.zoardgeocze.testehbsis.viewModel;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableInt;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
 import com.zoardgeocze.testehbsis.api.ApiCreator;
-import com.zoardgeocze.testehbsis.model.City;
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 import com.zoardgeocze.testehbsis.utils.Constants;
-import com.zoardgeocze.testehbsis.view.activity.AddWeatherForecastActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,33 +25,31 @@ import io.reactivex.schedulers.Schedulers;
  * Created by ZoardGeocze on 06/06/19.
  */
 
-public class WeatherForecastViewModel extends Observable {
+public class CurrentWeatherViewModel extends ViewModel {
 
-    public ObservableInt forecastRecycler;
+    public ObservableInt currentWeatherRecycler;
 
-    private Context context;
     private List<WeatherForecastResponse> weatherForecastList;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+    private MutableLiveData<List<WeatherForecastResponse>> weatherForecastResponseList = new MutableLiveData<>();
 
-    public WeatherForecastViewModel(@NonNull Context context) {
-        this.context = context;
+    public void init() {
         this.weatherForecastList = new ArrayList<>();
-        this.forecastRecycler = new ObservableInt(View.GONE);
-        fetchCityList();
+        this.currentWeatherRecycler = new ObservableInt(View.GONE);
+        fetchWeatherForecastList();
     }
 
-    public List<WeatherForecastResponse> getForecastResponseList() {
-        return this.weatherForecastList;
+    public MutableLiveData<List<WeatherForecastResponse>> getWeatherForecastResponseList() {
+        return this.weatherForecastResponseList;
     }
 
-    public void onClickAddForecast(View view) {
-        //TODO: Opens Add Forecast Activity
+    public void onClickAddNewCity(View view) {
         startAddWeatherForecastActivity();
     }
 
-    private void fetchCityList() {
+    private void fetchWeatherForecastList() {
         //TODO: Fetch the cities persisted when open the app
-        Disposable disposable = new ApiCreator()
+        /*Disposable disposable = new ApiCreator()
                 .forecastClimateService()
                 .fetchForecast(524901, Constants.API_KEY)
                 .subscribeOn(Schedulers.newThread())
@@ -77,7 +71,7 @@ public class WeatherForecastViewModel extends Observable {
                            });
 
 
-        compositeDisposable.add(disposable);
+        compositeDisposable.add(disposable);*/
     }
 
     private void updateWeatherForecastList() {
@@ -86,13 +80,11 @@ public class WeatherForecastViewModel extends Observable {
     }
 
     private void startAddWeatherForecastActivity() {
-        Intent intent = new Intent(this.context, AddWeatherForecastActivity.class);
-        ((Activity)this.context).startActivityForResult(intent, Constants.ADD_FORECAST);
+        /* Intent intent = new Intent(this.context, AddNewCityActivity.class);
+        ((Activity)this.context).startActivityForResult(intent, Constants.ADD_FORECAST); */
     }
 
-    public void dispose() {
-        if (compositeDisposable != null && compositeDisposable.isDisposed()) {
-            this.compositeDisposable.dispose();
-        }
-    }
+    @Override
+    protected void onCleared() { compositeDisposable.clear(); }
+
 }

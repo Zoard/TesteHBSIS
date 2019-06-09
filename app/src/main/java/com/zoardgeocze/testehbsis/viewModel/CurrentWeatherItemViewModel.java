@@ -1,7 +1,7 @@
 package com.zoardgeocze.testehbsis.viewModel;
 
+import android.arch.lifecycle.ViewModel;
 import android.content.Context;
-import android.databinding.BaseObservable;
 import android.view.View;
 
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
@@ -10,12 +10,12 @@ import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
  * Created by ZoardGeocze on 07/06/19.
  */
 
-public class ItemWeatherForecastViewModel extends BaseObservable {
+public class CurrentWeatherItemViewModel extends ViewModel {
 
     private WeatherForecastResponse weatherForecast;
     private Context context;
 
-    public ItemWeatherForecastViewModel(WeatherForecastResponse weatherForecast, Context context) {
+    public CurrentWeatherItemViewModel(WeatherForecastResponse weatherForecast, Context context) {
         this.weatherForecast = weatherForecast;
         this.context = context;
     }
@@ -26,6 +26,6 @@ public class ItemWeatherForecastViewModel extends BaseObservable {
 
     public void setWeatherForecast(WeatherForecastResponse weatherForecast) {
         this.weatherForecast = weatherForecast;
-        notifyChange();
+        //notifyChange();
     }
 }

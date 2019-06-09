@@ -5,31 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
+        <import type="android.view.View" />
+
         <variable
-            name="weatherForecastViewModel"
-            type="com.zoardgeocze.testehbsis.viewModel.WeatherForecastViewModel"/>
+            name="currentWeatherViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.CurrentWeatherViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
 
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.zoardgeocze.testehbsis.view.activity.WeatherForecastActivity">
+        tools:context=".view.activity.CurrentWeatherActivity">
 
         <!--<TextView
             android:id="@+id/label_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@{userViewModel.messageLabel}"
-            app:visibility="@{userViewModel.userLabel}"/>-->
+            android:text="@{currentWeatherViewModel.messageLabel}"
+            app:visibility="@{currentWeatherViewModel.label}"/>-->
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/display_forecast_recycler_view"
+            android:id="@+id/current_weather_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:visibility="@{weatherForecastViewModel.forecastRecycler}"
-            tools:listitem="@layout/item_weather_forecast"/>
+            app:visibility="@{currentWeatherViewModel.currentWeatherRecycler}"
+            tools:listitem="@layout/item_current_weather"/>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/add_forecast"
@@ -41,7 +44,7 @@
             android:src="@drawable/ic_add_24dp"
             android:clickable="true"
             android:focusable="true"
-            android:onClick="@{weatherForecastViewModel::onClickAddForecast}"/>
+            android:onClick="@{currentWeatherViewModel::onClickAddNewCity}"/>
 
 
 

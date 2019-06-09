@@ -6,25 +6,25 @@
 
     <data>
         <variable
-            name="addWeatherForecastViewModel"
-            type="com.zoardgeocze.testehbsis.viewModel.AddWeatherForecastViewModel"/>
+            name="addNewCityViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.AddNewCityViewModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.activity.AddWeatherForecastActivity">
+        tools:context=".view.activity.AddNewCityActivity">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{addWeatherForecastViewModel.viewsVisibility}">
+            android:visibility="@{addNewCityViewModel.viewsVisibility}">
 
             <EditText
                 android:id="@+id/add_weather_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:text="@={addWeatherForecastViewModel.cityName}"/>
+                android:text="@={addNewCityViewModel.cityName}"/>
                 <!--android:visibility="@{addWeatherForecastViewModel.cityNameLabel}"-->
 
 
@@ -36,7 +36,7 @@
                 android:layout_below="@+id/add_weather_edit_text"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="@{addWeatherForecastViewModel::onClickFetchWeatherForecast}"/>
+                android:onClick="@{addNewCityViewModel::onClickFetchWeatherForecast}"/>
                 <!--android:visibility="@{addWeatherForecastViewModel.addButton}"-->
 
         </RelativeLayout>
@@ -49,7 +49,7 @@
                 android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:visibility="@{addWeatherForecastViewModel.progressBar}"
+                app:visibility="@{addNewCityViewModel.progressBar}"
                 android:layout_centerInParent="true"/>
 
         </RelativeLayout>
