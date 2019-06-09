@@ -2,6 +2,7 @@ package com.zoardgeocze.testehbsis.viewModel;
 
 import android.arch.lifecycle.ViewModel;
 import android.content.Context;
+import android.databinding.ObservableField;
 import android.view.View;
 
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
@@ -13,11 +14,13 @@ import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 public class CurrentWeatherItemViewModel extends ViewModel {
 
     private WeatherForecastResponse weatherForecast;
-    private Context context;
+    public ObservableField<String> cityName;
+    public ObservableField<String> cityTemperature;
 
-    public CurrentWeatherItemViewModel(WeatherForecastResponse weatherForecast, Context context) {
-        this.weatherForecast = weatherForecast;
-        this.context = context;
+    public void init() {
+        this.weatherForecast = new WeatherForecastResponse();
+        this.cityName = new ObservableField<>();
+        this.cityTemperature = new ObservableField<>();
     }
 
     public void onClickItem(View view) {
@@ -26,6 +29,7 @@ public class CurrentWeatherItemViewModel extends ViewModel {
 
     public void setWeatherForecast(WeatherForecastResponse weatherForecast) {
         this.weatherForecast = weatherForecast;
-        //notifyChange();
+        this.cityName.set(weatherForecast.city.getName());
+        this.cityTemperature.set(Double.toString(weatherForecast.list.get(0).getMain().getTemp()));
     }
 }

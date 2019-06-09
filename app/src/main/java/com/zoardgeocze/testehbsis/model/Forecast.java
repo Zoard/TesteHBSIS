@@ -12,18 +12,18 @@ import java.io.Serializable;
 public class Forecast implements Serializable {
 
     private long dt;
-    private Weather main;
+    private WeatherMain main;
 
     public Forecast() {
         this.dt = 0;
-        this.main = new Weather();
+        this.main = new WeatherMain();
     }
 
     public long getDt() {
         return dt;
     }
 
-    public Weather getMain() {
+    public WeatherMain getMain() {
         return main;
     }
 }

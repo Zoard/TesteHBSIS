@@ -13,10 +13,10 @@ import com.zoardgeocze.testehbsis.viewModel.CurrentWeatherItemViewModel;
 
 public class CurrentWeatherViewHolder extends RecyclerView.ViewHolder {
 
-    private ItemCurrentWeatherBinding itemCurrentWeatherBinding;
+    private final ItemCurrentWeatherBinding itemCurrentWeatherBinding;
 
     public CurrentWeatherViewHolder(ItemCurrentWeatherBinding itemCurrentWeatherBinding) {
-        super(itemCurrentWeatherBinding.currentWeatherItem);
+        super(itemCurrentWeatherBinding.getRoot());
         this.itemCurrentWeatherBinding = itemCurrentWeatherBinding;
     }
 

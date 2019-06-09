@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import com.zoardgeocze.testehbsis.R;
 import com.zoardgeocze.testehbsis.databinding.ActivityCurrentWeatherBinding;
@@ -40,6 +41,7 @@ public class CurrentWeatherActivity extends AppCompatActivity {
         this.currentWeatherViewModel = ViewModelProviders.of(this).get(CurrentWeatherViewModel.class);
         this.currentWeatherViewModel.init();
         this.currentWeatherBinding.setCurrentWeatherViewModel(this.currentWeatherViewModel);
+        this.currentWeatherBinding.setLifecycleOwner(this);
         setLiveData();
     }
 
@@ -50,23 +52,37 @@ public class CurrentWeatherActivity extends AppCompatActivity {
     }
 
     private void setLiveData() {
-        this.currentWeatherViewModel
-                .getWeatherForecastResponseList()
-                .observe(this, this::updateItemOnWeatherForecastList);
+        this.currentWeatherViewModel.getWeatherForecastResponseList().observe(this, this::updateItemOnWeatherForecastList);
+        this.currentWeatherViewModel.getOnClick().observe(this, this::onClick);
     }
 
+
     public void updateItemOnWeatherForecastList(List<WeatherForecastResponse> weatherForecastResponseList) {
+        /*CurrentWeatherAdapter currentWeatherAdapter = (CurrentWeatherAdapter) this.currentWeatherBinding
+                .currentWeatherRecyclerView
+                .getAdapter();
+        currentWeatherAdapter.setCurrentWeatherList(weatherForecastResponseList);*/
+    }
+
+    public void onClick(View view) {
+        Intent intent = new Intent(this, AddNewCityActivity.class);
+        this.startActivityForResult(intent, Constants.ADD_FORECAST);
+    }
+
+    private void setNewItemOnCurrentWeatherList(WeatherForecastResponse weatherForecastResponse) {
         CurrentWeatherAdapter currentWeatherAdapter = (CurrentWeatherAdapter) this.currentWeatherBinding
                 .currentWeatherRecyclerView
                 .getAdapter();
-        currentWeatherAdapter.setCurrentWeatherList(weatherForecastResponseList);
+        currentWeatherAdapter.setCurrentWeatherList(weatherForecastResponse);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == Activity.RESULT_OK && requestCode == Constants.ADD_FORECAST) {
-            Log.i("ON_ACTIVITY_RESULT", "Recebeu o resultado...");
+            WeatherForecastResponse weatherForecastResponse = (WeatherForecastResponse) data.getSerializableExtra(Constants.RESPONSE);
+            Log.i("ON_ACTIVITY_RESULT:", weatherForecastResponse.city.getName());
+            this.setNewItemOnCurrentWeatherList(weatherForecastResponse);
         }
     }
 }

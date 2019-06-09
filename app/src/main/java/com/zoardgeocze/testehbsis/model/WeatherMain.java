@@ -9,7 +9,7 @@ import java.io.Serializable;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Weather implements Serializable {
+public class WeatherMain implements Serializable {
 
     private double temp;
     private double temp_min;
@@ -17,7 +17,7 @@ public class Weather implements Serializable {
     private double pressure;
     private int humidity;
 
-    public Weather() {
+    public WeatherMain() {
         this.temp = 0.0;
         this.temp_min = 0.0;
         this.temp_max = 0.0;
