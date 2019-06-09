@@ -1,40 +1,49 @@
 package com.zoardgeocze.testehbsis.viewModel;
 
-import android.content.Context;
-import android.databinding.BaseObservable;
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MutableLiveData;
+import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.util.Log;
 import android.view.View;
 
 import com.zoardgeocze.testehbsis.api.ApiCreator;
+import com.zoardgeocze.testehbsis.model.WeatherForecastItem;
 import com.zoardgeocze.testehbsis.model.WeatherForecastResponse;
 import com.zoardgeocze.testehbsis.utils.Constants;
 
-import java.util.Observable;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
+import rx.Subscriber;
+
 
 /**
  * Created by ZoardGeocze on 07/06/19.
  */
 
-public class AddWeatherForecastViewModel extends Observable {
+public class AddWeatherForecastViewModel extends ViewModel {
 
     public ObservableField<String> cityName;
     public ObservableInt progressBar;
     public ObservableInt viewsVisibility;
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private Context context;
 
-    public AddWeatherForecastViewModel(@NonNull Context context) {
-        this.context = context;
+    private MutableLiveData<WeatherForecastResponse> weatherForecastResponse = new MutableLiveData<>();
+
+    /*public AddWeatherForecastViewModel(@NonNull Context context) {
+        // this.context = context;
+        this.weatherForecast = new WeatherForecastResponse();
+        this.cityName = new ObservableField<>();
+        this.progressBar = new ObservableInt(View.GONE);
+        this.viewsVisibility = new ObservableInt(View.VISIBLE);
+    }*/
+
+    public void init() {
         this.cityName = new ObservableField<>();
         this.progressBar = new ObservableInt(View.GONE);
         this.viewsVisibility = new ObservableInt(View.VISIBLE);
@@ -46,7 +55,11 @@ public class AddWeatherForecastViewModel extends Observable {
         getForecastByCityName();
     }
 
-    private void getForecastByCityName() {
+    public MutableLiveData<WeatherForecastResponse> getNewWeatherForecast() {
+        return this.weatherForecastResponse;
+    }
+
+    /*private void getForecastByCityName() {
 
         Log.i("FETCH_City_Name: ", cityName.get());
 
@@ -57,11 +70,13 @@ public class AddWeatherForecastViewModel extends Observable {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<WeatherForecastResponse>() {
                     @Override
-                    public void accept(WeatherForecastResponse forecastClimateResponse) throws Exception {
-                        Log.i("FETCH_City_Name: ", forecastClimateResponse.city.getName());
-                        Log.i("FETCH_List_Size: ", Integer.toString(forecastClimateResponse.list.size()));
+                    public void accept(WeatherForecastResponse weatherForecastResponse) throws Exception {
+                        Log.i("FETCH_City_Name: ", weatherForecastResponse.city.getName());
+                        Log.i("FETCH_List_Size: ", Integer.toString(weatherForecastResponse.list.size()));
                         viewsVisibility.set(View.VISIBLE);
                         progressBar.set(View.GONE);
+                        weatherForecast = weatherForecastResponse;
+                        weatherForecast.setNewItem();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -72,8 +87,26 @@ public class AddWeatherForecastViewModel extends Observable {
                     }
                 });
 
+        weatherForecast.setNewItem();
+
         compositeDisposable.add(disposable);
+    }*/
+
+    private void getForecastByCityName() {
+
+        Log.i("FETCH_City_Name: ", cityName.get());
+
+        Disposable disposable = new ApiCreator()
+                .forecastClimateService()
+                .getForecastByCityName(cityName.get(), Constants.METRIC_UNIT, Constants.API_KEY)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(result -> weatherForecastResponse.setValue(result));
+
+        compositeDisposable.add(disposable);
+
     }
+
 
 
 }
