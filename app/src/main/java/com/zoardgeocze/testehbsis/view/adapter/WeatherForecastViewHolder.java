@@ -1,23 +1,25 @@
 package com.zoardgeocze.testehbsis.view.adapter;
 
-import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 
-import com.zoardgeocze.testehbsis.BR;
-import com.zoardgeocze.testehbsis.viewModel.WeatherForecastViewModel;
+import com.zoardgeocze.testehbsis.databinding.ItemWeatherForecastBinding;
+import com.zoardgeocze.testehbsis.model.Forecast;
+import com.zoardgeocze.testehbsis.viewModel.WeatherForecastItemViewModel;
 
 public class WeatherForecastViewHolder extends RecyclerView.ViewHolder {
 
-    private ViewDataBinding viewDataBinding;
+    private ItemWeatherForecastBinding itemWeatherForecastBinding;
+    private WeatherForecastItemViewModel weatherForecastItemViewModel;
 
-    public WeatherForecastViewHolder(ViewDataBinding viewDataBinding) {
-        super(viewDataBinding.getRoot());
-        this.viewDataBinding = viewDataBinding;
+    public WeatherForecastViewHolder(ItemWeatherForecastBinding itemWeatherForecastBinding) {
+        super(itemWeatherForecastBinding.weatherForecastItem);
+        this.itemWeatherForecastBinding = itemWeatherForecastBinding;
+        this.weatherForecastItemViewModel = new WeatherForecastItemViewModel();
+        this.weatherForecastItemViewModel.init(itemView.getContext());
+        this.itemWeatherForecastBinding.setWeatherForecastItemViewModel(this.weatherForecastItemViewModel);
     }
 
-    public void bind(WeatherForecastViewModel weatherForecastViewModel, Integer position) {
-        weatherForecastViewModel.fetchWeatherForecastItemImage(position);
-        this.viewDataBinding.setVariable(BR.weatherForecastViewModel, weatherForecastViewModel);
-        this.viewDataBinding.setVariable(BR.position, position);
+    public void bind(Forecast forecast) {
+        this.itemWeatherForecastBinding.getWeatherForecastItemViewModel().setCurrentWeather(forecast);
     }
 }

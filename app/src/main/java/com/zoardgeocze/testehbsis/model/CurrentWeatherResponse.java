@@ -14,7 +14,7 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CurrentWeatherResponse implements Serializable {
 
-    public long id;
+    public int id;
     public String name;
     public WeatherMain main;
     public List<WeatherStatus> weather = new ArrayList<>();

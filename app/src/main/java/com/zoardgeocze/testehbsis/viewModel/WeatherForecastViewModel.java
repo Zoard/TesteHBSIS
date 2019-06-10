@@ -1,11 +1,13 @@
 package com.zoardgeocze.testehbsis.viewModel;
 
+import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 import android.databinding.BindingAdapter;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 
 import com.zoardgeocze.testehbsis.R;
@@ -34,25 +36,16 @@ public class WeatherForecastViewModel extends ViewModel {
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private CurrentWeatherResponse currentWeatherResponse;
-    private WeatherForecastResponse weatherForecastResponse;
-    private WeatherForecastAdapter weatherForecastAdapter;
+    private MutableLiveData<WeatherForecastResponse> weatherForecastResponse = new MutableLiveData<>();
 
     public ObservableInt progressBar;
     public ObservableInt weatherForecastRecycler;
     public ObservableField<String> cityName;
-    public ObservableField<String> cityTemperature;
-    public ObservableField<String> cityTemperatureMax;
-    public ObservableField<String> cityTemperatureMin;
-    public ObservableField<String> cityHumidity;
-    public ObservableField<String> cityPressure;
-    public ObservableField<String> weatherDate;
 
 
     public void init(CurrentWeatherResponse currentWeatherResponse) {
         this.currentWeatherResponse = new CurrentWeatherResponse();
-        this.weatherForecastResponse = new WeatherForecastResponse();
         this.currentWeatherResponse = currentWeatherResponse;
-        this.weatherForecastAdapter = new WeatherForecastAdapter(R.layout.item_weather_forecast, this);
         setLayoutComponents();
         fetchWeatherForecastList();
     }
@@ -61,36 +54,23 @@ public class WeatherForecastViewModel extends ViewModel {
         this.progressBar = new ObservableInt(View.VISIBLE);
         this.weatherForecastRecycler = new ObservableInt(View.GONE);
         this.cityName = new ObservableField<>();
-        this.cityTemperature = new ObservableField<>();
-        this.cityTemperatureMax = new ObservableField<>();
-        this.cityTemperatureMin = new ObservableField<>();
-        this.cityHumidity = new ObservableField<>();
-        this.cityPressure = new ObservableField<>();
-        this.weatherDate = new ObservableField<>();
     }
 
-    public WeatherForecastAdapter getAdapter() {
-        return this.weatherForecastAdapter;
-    }
+    public MutableLiveData<WeatherForecastResponse> getWeatherForecastResponse() { return this.weatherForecastResponse; }
 
-    public void setWeaterForecastInAdapter(List<Forecast> forecastList) {
-        this.weatherForecastAdapter.setWeatherForecastList(forecastList);
-        this.weatherForecastAdapter.notifyDataSetChanged();
-    }
 
     private void fetchWeatherForecastList() {
         Disposable disposable = new ApiCreator()
                 .forecastClimateService()
-                .fetchWeatherForecast(this.currentWeatherResponse.id, Constants.METRIC_UNIT, Constants.API_KEY)
-                .subscribeOn(Schedulers.newThread())
+                .fetchWeatherForecast(String.valueOf(this.currentWeatherResponse.id), Constants.METRIC_UNIT, Constants.API_KEY)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe((result) -> {
-                            weatherForecastResponse = result;
+                .subscribe(result -> {
+                            this.weatherForecastResponse.setValue(result);
                             progressBar.set(View.GONE);
-                            setWeaterForecastInAdapter(weatherForecastResponse.getFiveDaysForecast());
                             weatherForecastRecycler.set(View.VISIBLE);
                         },
-                        ((throwable) -> {
+                        (throwable -> {
                             progressBar.set(View.GONE);
                         }));
 
@@ -98,20 +78,11 @@ public class WeatherForecastViewModel extends ViewModel {
         compositeDisposable.add(disposable);
     }
 
-    public void fetchWeatherForecastItemImage(Integer position) {
+    /*public void fetchWeatherForecastItemImage(Integer position) {
         //TODO: Fetch Image Here
-    }
-
-    public void onClickItem(Integer position) {
-
-    }
-
-    @BindingAdapter("setAdapter")
-    public static void bindRecyclerViewAdapter(RecyclerView recyclerView, RecyclerView.Adapter<?> adapter) {
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-        recyclerView.setAdapter(adapter);
-    }
+        List<Forecast> forecastList = getAdapter().getWeatherForecastList();
+        Forecast forecast = forecastList.get(position);
+    }*/
 
 
     @Override

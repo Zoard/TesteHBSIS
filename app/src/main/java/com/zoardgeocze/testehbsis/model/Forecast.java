@@ -19,15 +19,10 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Forecast implements Serializable {
 
-    private long dt;
-    private WeatherMain main;
-    private List<WeatherStatus> weather;
+    public long dt;
+    public WeatherMain main = new WeatherMain();
+    public List<WeatherStatus> weather = new ArrayList<>();
 
-    public Forecast() {
-        this.dt = 0;
-        this.main = new WeatherMain();
-        this.weather = new ArrayList<>();
-    }
 
     public long getDt() {
         return dt;

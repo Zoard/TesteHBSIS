@@ -63,12 +63,11 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/weather_forecast_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_weather_forecast"
-                app:visibility="@{weatherForecastViewModel.weatherForecastRecycler}"
-                app:setAdapter="@{weatherForecastViewModel.getAdapter}">
-
+                app:visibility="@{weatherForecastViewModel.weatherForecastRecycler}">
             </android.support.v7.widget.RecyclerView>
 
         </android.support.v4.widget.NestedScrollView>

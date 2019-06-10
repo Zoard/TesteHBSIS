@@ -4,14 +4,9 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="position"
-            type="java.lang.Integer" />
-
-        <variable
-            name="weatherForecastViewModel"
-            type="com.zoardgeocze.testehbsis.viewModel.WeatherForecastViewModel" />
+            name="weatherForecastItemViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.WeatherForecastItemViewModel" />
     </data>
 
     <android.support.v7.widget.CardView
@@ -30,8 +25,8 @@
             android:layout_height="match_parent"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:onClick="@{() -> weatherForecastViewModel.onClickItem(position)}">
+            android:foreground="?android:attr/selectableItemBackground">
+            <!--android:onClick="@{weatherForecastItemViewModel::onClickItem}"-->
 
             <View
                 android:layout_width="match_parent"
@@ -49,7 +44,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
-                android:layout_margin="30dp"/>
+                android:layout_margin="25dp"/>
 
             <TextView
                 android:id="@+id/city_name_label"
@@ -65,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:text="@={weatherForecastViewModel.cityName}"
+                android:text="@={weatherForecastItemViewModel.cityName}"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
@@ -77,9 +72,9 @@
                 android:layout_alignTop="@+id/ic_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="60sp"
+                android:textSize="55sp"
                 android:textColor="@color/black"
-                android:text="@={weatherForecastViewModel.cityTemperature}"/>
+                android:text="@={weatherForecastItemViewModel.cityTemperature}"/>
 
             <TextView
                 android:id="@+id/city_temperature_max_label"
@@ -96,9 +91,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/city_temperature_max_label"
                 android:layout_toRightOf="@+id/city_temperature_max_label"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:layout_marginLeft="20dp"
-                android:text="@={weatherForecastViewModel.cityTemperatureMax}"/>
+                android:text="@={weatherForecastItemViewModel.cityTemperatureMax}"/>
 
             <TextView
                 android:id="@+id/city_temperature_min_label"
@@ -116,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/city_temperature_min_label"
                 android:layout_toRightOf="@+id/city_temperature_min_label"
-                android:textSize="20sp"
-                android:layout_marginLeft="20dp"
-                android:text="@={weatherForecastViewModel.cityTemperatureMin}"/>
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/city_temperature_max"
+                android:text="@={weatherForecastItemViewModel.cityTemperatureMin}"/>
 
             <TextView
                 android:id="@+id/city_humidity_label"
@@ -136,9 +131,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/city_humidity_label"
                 android:layout_toRightOf="@+id/city_humidity_label"
-                android:textSize="20sp"
-                android:layout_marginLeft="20dp"
-                android:text="@={weatherForecastViewModel.cityHumidity}"/>
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/city_temperature_max"
+                android:text="@={weatherForecastItemViewModel.cityHumidity}"/>
 
             <TextView
                 android:id="@+id/city_pressure_label"
@@ -156,9 +151,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBaseline="@+id/city_pressure_label"
                 android:layout_toRightOf="@+id/city_pressure_label"
-                android:textSize="20sp"
-                android:layout_marginLeft="20dp"
-                android:text="@={weatherForecastViewModel.cityPressure}"/>
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/city_temperature_max"
+                android:text="@={weatherForecastItemViewModel.cityPressure}"/>
 
             <TextView
                 android:id="@+id/weather_date"
@@ -166,7 +161,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:text="@={weatherForecastViewModel.weatherDate}"
+                android:text="@={weatherForecastItemViewModel.weatherDate}"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"

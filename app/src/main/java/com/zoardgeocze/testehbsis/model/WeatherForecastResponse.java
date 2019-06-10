@@ -22,7 +22,13 @@ public class WeatherForecastResponse implements Serializable {
     public List<Forecast> getFiveDaysForecast() {
 
         List<Forecast> forecasts = new ArrayList<>();
-        double temp = 0.0, tempMax = 0.0, tempMin = 0.0, pressure = 0.0, humidity = 0.0;
+
+        double temp = 0.0;
+        double tempMax = 0.0;
+        double tempMin = 0.0;
+        double pressure = 0.0;
+        double humidity = 0.0;
+
         int forecastPerDay = 8;
 
         for(int i = 0; i < this.list.size(); i++) {
@@ -37,14 +43,13 @@ public class WeatherForecastResponse implements Serializable {
                 forecasts.add(this.list.get(i));
                 temp = 0.0; tempMax = 0.0; tempMin = 0.0; humidity = 0.0; pressure = 0.0;
 
+            } else {
+                temp += this.list.get(i).getMain().getTemp();
+                tempMax += this.list.get(i).getMain().getTemp_max();
+                tempMin += this.list.get(i).getMain().getTemp_min();
+                humidity += this.list.get(i).getMain().getHumidity();
+                pressure += this.list.get(i).getMain().getPressure();
             }
-
-            temp += this.list.get(i).getMain().getTemp();
-            tempMax += this.list.get(i).getMain().getTemp_max();
-            tempMin += this.list.get(i).getMain().getTemp_min();
-            humidity += this.list.get(i).getMain().getHumidity();
-            pressure += this.list.get(i).getMain().getPressure();
-
         }
 
         return forecasts;

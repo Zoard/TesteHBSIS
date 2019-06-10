@@ -24,7 +24,7 @@ public interface WeatherForecastService {
                                                                    @Query("appid") String appid);
 
     @GET("forecast")
-    Observable<WeatherForecastResponse> fetchWeatherForecast(@Query("id") long id,
+    Observable<WeatherForecastResponse> fetchWeatherForecast(@Query("id") String id,
                                                              @Query("units") String units,
                                                              @Query("appid") String appid);
 
