@@ -29,24 +29,145 @@
             android:clickable="true"
             android:foreground="?android:attr/selectableItemBackground"
             android:onClick="@{currentWeatherItemViewModel::onClickItem}">
+            
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorAccent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/colorAccent"
+                android:layout_alignParentBottom="true"/>
+            
+            <ImageView
+                android:id="@+id/ic_weather"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:layout_margin="25dp"/>
+
+            <TextView
+                android:id="@+id/city_name_label"
+                android:layout_toRightOf="@+id/ic_weather"
+                android:layout_alignTop="@+id/ic_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
 
             <TextView
                 android:id="@+id/city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
                 android:textSize="22sp"
+                android:textStyle="bold"
                 android:text="@={currentWeatherItemViewModel.cityName}"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
                 tools:ignore="RtlCompat"/>
 
             <TextView
                 android:id="@+id/city_temperature"
+                android:layout_toRightOf="@+id/ic_weather"
+                android:layout_alignTop="@+id/ic_weather"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/city_name"
-                android:layout_margin="20dp"
-                android:textSize="12sp"
+                android:textSize="55sp"
+                android:textColor="@color/black"
                 android:text="@={currentWeatherItemViewModel.cityTemperature}"/>
+
+            <TextView
+                android:id="@+id/city_temperature_max_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/ic_weather"
+                android:layout_marginLeft="30dp"
+                android:textSize="15sp"
+                android:text="@string/Max"/>
+
+            <TextView
+                android:id="@+id/city_temperature_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/city_temperature_max_label"
+                android:layout_toRightOf="@+id/city_temperature_max_label"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                android:text="@={currentWeatherItemViewModel.cityTemperatureMax}"/>
+
+            <TextView
+                android:id="@+id/city_temperature_min_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/city_temperature_max_label"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:text="@string/Min"/>
+
+            <TextView
+                android:id="@+id/city_temperature_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/city_temperature_min_label"
+                android:layout_toRightOf="@+id/city_temperature_min_label"
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/city_temperature_max"
+                android:text="@={currentWeatherItemViewModel.cityTemperatureMin}"/>
+
+            <TextView
+                android:id="@+id/city_humidity_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/city_temperature_min_label"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:text="@string/Umidade"/>
+
+            <TextView
+                android:id="@+id/city_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/city_humidity_label"
+                android:layout_toRightOf="@+id/city_humidity_label"
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/city_temperature_max"
+                android:text="@={currentWeatherItemViewModel.cityHumidity}"/>
+
+            <TextView
+                android:id="@+id/city_pressure_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/city_humidity_label"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="5dp"
+                android:textSize="15sp"
+                android:text="@string/Pressao"/>
+
+            <TextView
+                android:id="@+id/city_pressure"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/city_pressure_label"
+                android:layout_toRightOf="@+id/city_pressure_label"
+                android:textSize="15sp"
+                android:layout_alignLeft="@+id/city_temperature_max"
+                android:text="@={currentWeatherItemViewModel.cityPressure}"/>
+
+            <TextView
+                android:id="@+id/weather_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:text="@={currentWeatherItemViewModel.weatherDate}"
+                android:textColor="@color/black"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                tools:ignore="RtlCompat"/>
 
         </RelativeLayout>
 

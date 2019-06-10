@@ -25,19 +25,15 @@ import java.util.List;
 public class CurrentWeatherAdapter extends RecyclerView.Adapter<CurrentWeatherViewHolder> {
 
     private List<CurrentWeatherResponse> currentWeatherList = new ArrayList<>();
-    private CurrentWeatherItemViewModel currentWeatherItemViewModel;
 
     @Override
     public CurrentWeatherViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        // this.currentWeatherItemViewModel = ViewModelProviders.of((FragmentActivity) parent.getContext()).get(CurrentWeatherItemViewModel.class);
-        // this.currentWeatherItemViewModel.init();
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         ItemCurrentWeatherBinding itemCurrentWeatherBinding = DataBindingUtil.inflate(
                         layoutInflater,
                         R.layout.item_current_weather,
                         parent,
                         false);
-        // itemCurrentWeatherBinding.setCurrentWeatherItemViewModel(currentWeatherItemViewModel);
         return new CurrentWeatherViewHolder(itemCurrentWeatherBinding);
     }
 

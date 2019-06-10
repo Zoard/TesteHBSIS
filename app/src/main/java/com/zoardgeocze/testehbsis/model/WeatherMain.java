@@ -13,7 +13,7 @@ public class WeatherMain implements Serializable {
 
     private double temp;
     private double pressure;
-    private int humidity;
+    private double humidity;
     private double temp_min;
     private double temp_max;
 
@@ -37,8 +37,33 @@ public class WeatherMain implements Serializable {
         return pressure;
     }
 
-    public int getHumidity() {
+    public double getHumidity() {
         return humidity;
     }
 
+    public String getTempView() { return String.valueOf((int)Math.ceil(temp) + "º");}
+
+    public String getTempMinView() { return String.valueOf((int)Math.floor(temp_min) + "º"); }
+
+    public String getTempMaxView() {
+        return String.valueOf((int)Math.ceil(temp_max) + "º");
+    }
+
+    public String getPressureView() {
+        return String.valueOf(pressure);
+    }
+
+    public String getHumidityView() {
+        return String.valueOf(humidity) + "%";
+    }
+
+    public void setAverage(double temp, double temp_max, double temp_min, double pressure, double humidity) {
+        double forecastPerDay = 8.0;
+
+        this.temp = temp/forecastPerDay;
+        this.temp_max = temp_max/forecastPerDay;
+        this.temp_min = temp_min/forecastPerDay;
+        this.pressure = pressure/forecastPerDay;
+        this.humidity = humidity/forecastPerDay;
+    }
 }

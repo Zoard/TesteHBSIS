@@ -27,19 +27,26 @@ public class WeatherForecastActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         bind();
-        getDataFromIntent();
+
     }
 
     private void bind() {
         this.activityWeatherForecastBinding = DataBindingUtil.setContentView(this, R.layout.activity_weather_forecast);
         this.weatherForecastViewModel = ViewModelProviders.of(this).get(WeatherForecastViewModel.class);
-        this.weatherForecastViewModel.init();
+        this.weatherForecastViewModel.init(getDataFromIntent());
         this.activityWeatherForecastBinding.setWeatherForecastViewModel(this.weatherForecastViewModel);
+        setLiveData();
     }
 
-    private void getDataFromIntent() {
+    private void setLiveData() {
+
+    }
+
+    private CurrentWeatherResponse getDataFromIntent() {
         Intent intent = getIntent();
         CurrentWeatherResponse currentWeatherResponse = (CurrentWeatherResponse) intent.getSerializableExtra(Constants.CITY);
         Toast.makeText(this, currentWeatherResponse.name + " " + currentWeatherResponse.main.getTemp(), Toast.LENGTH_LONG).show();
+
+        return currentWeatherResponse;
     }
 }

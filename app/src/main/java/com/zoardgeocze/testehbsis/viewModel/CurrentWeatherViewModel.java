@@ -83,6 +83,6 @@ public class CurrentWeatherViewModel extends ViewModel {
     }
 
     @Override
-    protected void onCleared() { compositeDisposable.clear(); }
+    protected void onCleared() { this.compositeDisposable.clear(); }
 
 }

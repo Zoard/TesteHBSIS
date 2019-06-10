@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 import android.view.View;
+import android.widget.Toast;
 
 import com.zoardgeocze.testehbsis.api.ApiCreator;
 import com.zoardgeocze.testehbsis.model.CurrentWeatherResponse;
@@ -53,7 +54,11 @@ public class AddNewCityViewModel extends ViewModel {
                 .getCurrentWeatherByCityName(cityName.get(), Constants.METRIC_UNIT, Constants.API_KEY)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(result -> currentWeatherResponse.setValue(result));
+                .subscribe(result -> currentWeatherResponse.setValue(result),
+                        throwable -> {
+                            progressBar.set(View.GONE);
+                            viewsVisibility.set(View.VISIBLE);
+                        });
 
         compositeDisposable.add(disposable);
     }

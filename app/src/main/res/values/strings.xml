@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">TesteHBSIS</string>
+    <string name="Max">Máx</string>
+    <string name="Min">Min</string>
+    <string name="Umidade">Umid.</string>
+    <string name="Pressao">Pres.</string>
 </resources>
