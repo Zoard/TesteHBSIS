@@ -55,12 +55,12 @@
                 />
 
             <TextView
-                android:id="@+id/city_name"
+                android:id="@+id/weather_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:text="@={weatherForecastItemViewModel.cityName}"
+                android:text="@={weatherForecastItemViewModel.weatherDate}"
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentTop="true"
@@ -155,7 +155,7 @@
                 android:layout_alignLeft="@+id/city_temperature_max"
                 android:text="@={weatherForecastItemViewModel.cityPressure}"/>
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/weather_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,7 +165,7 @@
                 android:textColor="@color/black"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                tools:ignore="RtlCompat"/>
+                tools:ignore="RtlCompat"/>-->
 
         </RelativeLayout>
 

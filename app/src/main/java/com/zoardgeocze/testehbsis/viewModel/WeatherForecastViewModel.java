@@ -53,7 +53,7 @@ public class WeatherForecastViewModel extends ViewModel {
     private void setLayoutComponents() {
         this.progressBar = new ObservableInt(View.VISIBLE);
         this.weatherForecastRecycler = new ObservableInt(View.GONE);
-        this.cityName = new ObservableField<>();
+        this.cityName = new ObservableField<>(this.currentWeatherResponse.name);
     }
 
     public MutableLiveData<WeatherForecastResponse> getWeatherForecastResponse() { return this.weatherForecastResponse; }

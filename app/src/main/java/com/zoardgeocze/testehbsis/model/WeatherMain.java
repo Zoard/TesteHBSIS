@@ -3,6 +3,7 @@ package com.zoardgeocze.testehbsis.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * Created by ZoardGeocze on 07/06/19.
@@ -50,11 +51,13 @@ public class WeatherMain implements Serializable {
     }
 
     public String getPressureView() {
-        return String.valueOf(pressure);
+        DecimalFormat df1 = new DecimalFormat("#.#");
+        return String.valueOf(df1.format(pressure));
     }
 
     public String getHumidityView() {
-        return String.valueOf(humidity) + "%";
+        DecimalFormat df1 = new DecimalFormat("#.#");
+        return String.valueOf(df1.format(humidity)) + "%";
     }
 
     public void setAverage(double temp, double temp_max, double temp_min, double pressure, double humidity) {

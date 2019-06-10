@@ -29,14 +29,11 @@ public class Forecast implements Serializable {
     }
 
     public String getDateView() {
-        String dateStr = String.valueOf(dt);
+        Date date = new java.util.Date(dt*1000L);
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy");
+        sdf.setTimeZone(java.util.TimeZone.getTimeZone("GMT-3"));
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(dt);
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-
-        return sdf.format(calendar.getTime());
+        return sdf.format(date);
     }
 
     public WeatherMain getMain() {

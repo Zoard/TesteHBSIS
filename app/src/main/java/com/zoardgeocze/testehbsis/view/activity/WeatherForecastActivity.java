@@ -67,7 +67,7 @@ public class WeatherForecastActivity extends AppCompatActivity {
     private CurrentWeatherResponse getDataFromIntent() {
         Intent intent = getIntent();
         CurrentWeatherResponse currentWeatherResponse = (CurrentWeatherResponse) intent.getSerializableExtra(Constants.CITY);
-        Toast.makeText(this, currentWeatherResponse.name + " " + currentWeatherResponse.main.getTemp(), Toast.LENGTH_LONG).show();
+        // Toast.makeText(this, currentWeatherResponse.name + " " + currentWeatherResponse.main.getTemp(), Toast.LENGTH_LONG).show();
 
         return currentWeatherResponse;
     }
