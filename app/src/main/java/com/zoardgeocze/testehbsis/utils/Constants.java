@@ -15,6 +15,7 @@ public interface Constants {
     // INTENT REQUESTS
 
     public final String RESPONSE = "response";
+    public final String CITY = "city";
 
     public final int ADD_FORECAST = 101;
 }

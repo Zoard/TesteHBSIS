@@ -19,7 +19,7 @@ public class CurrentWeatherViewHolder extends RecyclerView.ViewHolder {
         super(itemCurrentWeatherBinding.currentWeatherItem);
         this.itemCurrentWeatherBinding = itemCurrentWeatherBinding;
         this.currentWeatherItemViewModel = new CurrentWeatherItemViewModel();
-        this.currentWeatherItemViewModel.init();
+        this.currentWeatherItemViewModel.init(itemView.getContext());
         this.itemCurrentWeatherBinding.setCurrentWeatherItemViewModel(this.currentWeatherItemViewModel);
     }
 

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto">
+
+    <!--<data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="currentWeatherItemViewModel"
+            type="com.zoardgeocze.testehbsis.viewModel.CurrentWeatherItemViewModel" />
+    </data>-->
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/current_weather_item"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        card_view:cardCornerRadius="5dp"
+        card_view:cardElevation="10dp">
+
+        <RelativeLayout
+            android:id="@+id/current_weather"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground">
+            <!--android:onClick="@{currentWeatherItemViewModel::onClickItem}"-->
+
+            <TextView
+                android:id="@+id/city_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textSize="22sp"
+                tools:ignore="RtlCompat"/>
+                <!--android:text="@={currentWeatherItemViewModel.cityName}"-->
+
+            <TextView
+                android:id="@+id/city_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/city_name"
+                android:layout_margin="20dp"
+                android:textSize="12sp"/>
+                <!--android:text="@={currentWeatherItemViewModel.cityTemperature}"/>-->
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</layout>
